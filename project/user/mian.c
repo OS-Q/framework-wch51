@@ -10,10 +10,17 @@
 #include "I2C.h"
 #include "pwm.h"
 
+#define SYS_CLK_EN              0
+#define SYS_SEL                 2
+#define SYS_DIV_EN              0                   //0: Fsys=Fosc, 1: Fsys = Fosc/(2*CKDIV)
+#define SYS_DIV                 1
+
 
 
 #define TH0_INIT        1300 
 #define TL0_INIT        1300	//定时器
+
+
 U8 u8TH0_Tmp,u8TL0_Tmp;
 U16 Timflag;
 U16 zhuflag;
@@ -21,11 +28,12 @@ U8 systatus;
 U8 led_flag;
 U8 num_2 = 0;
 
+/*
 U8 xdata led_eff[88]={0x00,0x00,0xf1,0x00,0x00,0x00 ,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x00,0x00,0xf1,0xff,
 0x00 ,0x00,0x00 ,0x00,0x00,0xf1, 0x00, 0x00, 0x00, 0x00 ,0x00, 0x00, 0x00, 0x00, 0x00,0x00,0x00,0xf1, 0x00, 0x00, 0x00, 0xff,
 0x00 ,0x00 ,0x00, 0x00, 0x00 ,0x00 ,0x00,0x00,0xf1, 0x00 ,0x00 ,0x00 ,0x00,0x00,0xf1, 0x00, 0x00, 0x00, 0x00 ,0x00, 0x00, 0xff,
 0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00, 0x00,0x00 ,0x00, 0x00,0x00,0xf1 ,0x00 ,0x00 ,0x00 ,0x00, 0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0xff};
-/*
+
 	U8 xdata led_eff[88]={0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xff,
 0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xff,
 0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xf1,0xff,
@@ -53,85 +61,37 @@ void Timer0_ISR (void) interrupt 1
 }
 
 
-void led_task(void)
-{
-	U8 i;	
-/*******************************************************************************
-	灯数据发送过来，初始化必要的数据
-*******************************************************************************/	
-	if( Rxflag == 1)
-	{				
-		Rxflag = 0;
-		systatus = 0;
-		Timflag =0;
-		i = 0;
-		led_flag = 1;
-		led_lck = 0;
-	}
-/*******************************************************************************
-	led_flag为1说明没有新的灯数据发送过来，一直执行之前的效果
-*******************************************************************************/	
-	if(200 <= Timflag && led_flag == 1)
-	{
-		//WS_frame_asyn(&(data_store+i*21+i));		
-		i++;
-		if(i>=led_number)
-				i=0;
-		Timflag = 0;
-	}
-/*******************************************************************************
-	led_lck取值为数据第二位0xf1为灯，0xa1为蜂鸣器，只有灯才把led_flag置1 
-*******************************************************************************/	
-	if(led_lck == 0xf1 && led_flag == 1 )
-	{
-		ring_display_clear();										
-		led_flag = 0;
-	}				
-}
-
 void main(void)
 {	
-	U8 led_i = 0;	
+	//U8 led_i = 0;	
 	Set_All_GPIO_Quasi_Mode;
 	Timer0_init();
 	pwm_init();
 	Init_I2C();
 	P00_PushPull_Mode;
- 	InitialUART0_Timer3(115200);
+
 	set_PI2C;
 	set_PI2CH;
 	P00 = 1;
-	Send_Data_To_UART0(0x00);
 	
-#if 1
-	systatus = 0;
-	Timflag = 0;
-	while(led_lck!=0xf1)
-	{
-		if(200 <= Timflag)
-		{
-				if(led_lck!=0xf1)//begin_flag!=1)
-				{		
-					WS_frame_asyn(&(led_eff+led_i*21+led_i));		
-					led_i++;
-					if(led_i>=4)
-						led_i=0;
-					Timflag = 0;
-				}
-		}	
-		i2c_task();
-	}
-	ring_display_clear();
-#endif
+	InitialUART0_Timer3(115200);
+	Send_Data_To_UART0(0x10);
+	printf("\ntest printf %d ", 0x01);
 	
 	while(1)
 	{			
 		if(zhuflag>=4)
 		{
-				i2c_task();	
+				i2c_wait_task();	
+				
 				zhuflag = 0;
 		}
-			
+		if(Timflag>=6)
+		{
+				
+				i2c_send_task();
+				Timflag = 0;
+		}			
 	}		
 }
 

@@ -24,6 +24,8 @@ U8 begin_flag = 0;
 U8 led_number = 0;
 U8 led_lck = 0;
 
+bit I2C_Reset_Flag;
+
 void Init_I2C(void)
 {
 		P13_OpenDrain_Mode;
@@ -39,10 +41,31 @@ void Init_I2C(void)
 
 		memset(data_received,0x00,64);//清零，防止后面处理数据时拿取的数据出错
 		memset(data_store,0x00,256);	
-
 }
 
-void i2c_task(void)
+void I2C_SI_Check(void)
+{
+		if (I2STAT == 0x00)
+		{
+				I2C_Reset_Flag = 1;
+				set_STO;
+				SI = 0;
+				if(SI)
+				{
+						clr_I2CEN;
+						set_I2CEN;
+						clr_SI;
+						clr_I2CEN;		
+				} 	
+		}	
+}
+
+void i2c_send_task(void)
+{	
+	printf("\n test i2c_send_task ");
+}
+
+void i2c_wait_task(void)
 {	
 	if( begin_flag == 1)	 //主机发送数据结束标志
 	{			
@@ -189,11 +212,6 @@ void I2C_ISR(void) interrupt 6
     }   
     while(STO);
 }
-
-
-
-
-
 
 
 /************************ (C) COPYRIGHT Q-i-t-a-s **********************/
