@@ -62,7 +62,7 @@ void I2C_SI_Check(void)
 
 void i2c_send_task(void)
 {	
-	printf("\n test i2c_send_task ");
+	//printf("\n test i2c_send_task ");
 }
 
 void i2c_wait_task(void)
