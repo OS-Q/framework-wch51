@@ -11,6 +11,10 @@
 #define  UART1_BAUD    9600
 #endif
 
+#ifndef FREQ_SYS
+#define  FREQ_SYS    (24000000)
+#endif
+
 void	CfgFsys( );                       // CH554 clock selection and configuration
 
 void mDelayuS (uint16_t n); // Delay in units of uS
