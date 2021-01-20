@@ -1,7 +1,7 @@
 {
+    "name": "N04",
     "description": "Library for ch55x MCUs",
-    "name": "framework-ch55x",
     "system": "all",
-    "url": "https://github.com/OS-Q/N22",
+    "url": "https://github.com/OS-Q/N04",
     "version": "1.0.0"
 }

@@ -1,7 +1,4 @@
 
-/* Debug */
-/* Provide printf subroutine and delay function */
-
 #pragma once
 
 #include <stdint.h>

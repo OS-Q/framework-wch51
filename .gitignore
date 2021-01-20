@@ -4,5 +4,5 @@
 *.DS_Store
 *desktop*
 *.o
-.pio/
-.vscode/
+*.pio/
+*.vscode/
