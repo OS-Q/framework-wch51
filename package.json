@@ -2,6 +2,6 @@
     "name": "E13A",
     "description": "Library for ch55x MCUs",
     "system": "all",
-    "url": "https://github.com/OS-Q/E13A",
+    "url": "https://github.com/Blinkinlabs/ch554_sdcc",
     "version": "1.0.0"
 }
