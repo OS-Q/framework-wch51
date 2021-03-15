@@ -14,6 +14,10 @@
 #define  UART1_BAUD    9600
 #endif
 
+#ifndef FREQ_SYS
+#define  FREQ_SYS    (24000000)
+#endif
+
 void	CfgFsys( );                       // CH554 clock selection and configuration
 
 void mDelayuS (uint16_t n); // Delay in units of uS
@@ -102,7 +106,7 @@ inline void	UART1Setup()
     U1SM0 = 0;                          //UART1选择8位数据位
     U1SMOD = 1;                         //快速模式
     U1REN = 1;                          //使能接收
-    // should correct for rounding in SBAUD1 calculation 
+    // should correct for rounding in SBAUD1 calculation
     SBAUD1 = 256 - FREQ_SYS/16/UART1_BAUD;
 }
 
