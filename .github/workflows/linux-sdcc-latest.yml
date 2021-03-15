@@ -25,6 +25,7 @@ jobs:
         wget https://jaist.dl.sourceforge.net/project/sdcc/sdcc-linux-amd64/4.1.0/sdcc-4.1.0-amd64-unknown-linux2.5.tar.bz2
         tar -xf sdcc-4.1.0-amd64-unknown-linux2.5.tar.bz2
         echo `pwd`/sdcc/bin >> $GITHUB_PATH
+        sudo apt install -y build-essential
 
     - name: Build examples
       run: make
