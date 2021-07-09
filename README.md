@@ -1,13 +1,11 @@
-﻿# [E13A](https://github.com/OS-Q/E13A)
+﻿# [F152](https://github.com/OS-Q/F152)
 
 [![sites](http://182.61.61.133/link/resources/OSQ.png)](http://www.OS-Q.com)
 
-[![Build Status](https://github.com/OS-Q/E13A/workflows/SDCC_default/badge.svg)](https://github.com/OS-Q/E13A/actions)
-[![Build Status](https://github.com/OS-Q/E13A/workflows/SDCC_4.0.0/badge.svg)](https://github.com/OS-Q/E13A/actions)
-[![Build Status](https://github.com/OS-Q/E13A/workflows/SDCC_4.1.0/badge.svg)](https://github.com/OS-Q/E13A/actions)
+[![Build Status](https://github.com/OS-Q/F152/workflows/CI/badge.svg)](https://github.com/OS-Q/F152/actions/workflows/CI.yml)
 
-### [简介](https://github.com/OS-Q/E13A/wiki)
+### [简介](https://github.com/OS-Q/F152/wiki)
 
-[E13A](https://github.com/OS-Q/E13A) 扩展 [P13](https://github.com/OS-Q/P13)
+[F152](https://github.com/OS-Q/F152)
 
-### [源圈 OS-Q (Open Source & QA) ](http://www.OS-Q.com)
+### [源圈OS-Q](http://www.OS-Q.com)

@@ -1,4 +1,4 @@
-name: SDCC_4.0.0
+name: CI
 
 on:
   push:
