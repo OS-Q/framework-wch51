@@ -1,11 +1,9 @@
-﻿# [F152](https://github.com/OS-Q/F152)
+﻿# [framework-wch51](https://github.com/OS-Q/framework-wch51)
 
-[![sites](http://182.61.61.133/link/resources/OSQ.png)](http://www.OS-Q.com)
+[![Build Status](https://github.com/OS-Q/framework-wch51/workflows/CI/badge.svg)](https://github.com/OS-Q/framework-wch51/actions/workflows/CI.yml)
 
-[![Build Status](https://github.com/OS-Q/F152/workflows/CI/badge.svg)](https://github.com/OS-Q/F152/actions/workflows/CI.yml)
+[framework-wch51](https://github.com/OS-Q/framework-wch51)基于[WCH](https://www.wch.cn/)官方库开发，应用于[PIO WCH51](https://github.com/OS-Q/platform-wch51)平台
 
-### [简介](https://github.com/OS-Q/F152/wiki)
-
-[F152](https://github.com/OS-Q/F152)
-
-### [源圈OS-Q](http://www.OS-Q.com)
+参考工程：
+* [nerdralph/ch554_sdcc](https://github.com/nerdralph/ch554_sdcc)
+* [Blinkinlabs/ch554_sdcc](https://github.com/Blinkinlabs/ch554_sdcc)

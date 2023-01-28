@@ -13,12 +13,12 @@ on:
       - github_actions
 
 jobs:
-  build:
+  sdcc:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out
-      uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v3
 
     - name: Download SDCC
       run: |
@@ -26,6 +26,20 @@ jobs:
         tar -xf sdcc-4.0.0-amd64-unknown-linux2.5.tar.bz2
         echo `pwd`/sdcc-4.0.0/bin >> $GITHUB_PATH
         sudo apt install -y build-essential
+
+    - name: Build examples
+      run: make
+      working-directory: examples
+
+  linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install SDCC
+      run: sudo apt-get install -y sdcc
 
     - name: Build examples
       run: make

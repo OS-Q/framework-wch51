@@ -1,6 +1,6 @@
 {
-    "name": "F152",
-    "description": "Library for ch55x MCUs",
+    "name": "framework-wch51",
+    "description": "Library for WCH 8051 MCUs",
     "system": "all",
     "url": "https://github.com/Blinkinlabs/ch554_sdcc",
     "version": "1.0.0"
