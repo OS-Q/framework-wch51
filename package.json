@@ -2,6 +2,6 @@
     "name": "framework-wch51",
     "description": "Library for WCH 8051 MCUs",
     "system": "all",
-    "url": "https://github.com/Blinkinlabs/ch554_sdcc",
-    "version": "1.0.0"
+    "url": "https://github.com/OS-Q/framework-wch51",
+    "version": "0.1.0"
 }
